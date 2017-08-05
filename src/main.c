@@ -6,34 +6,41 @@
 /*   By: sbrochar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 16:08:28 by sbrochar          #+#    #+#             */
-/*   Updated: 2017/08/04 16:05:45 by sbrochar         ###   ########.fr       */
+/*   Updated: 2017/08/05 12:03:47 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-/*static void			execute_child(char **cmd)
+static void			execute_child(/*t_dblist **env, */char **cmd)
 {
-	ft_printf("cmd: %s\n", *cmd);
-	ft_printf("1st arg: %s\n", *(cmd + 1));
 	execve(*cmd, cmd, NULL);
-}*/
+}
 
-/*static void			check_env_vars(t_dblist **save)
+static void			handle_cmd(/*t_dblist **env, */char **cmd)
 {
-	(void **)save;
-	ft_printf("check if there is PWD and SHLVL\n");
-}*/
-
-static void			handle_cmd(char **cmd)
-{
+	// test cmd
+	int				i = 0;
 	ft_printf("cmd:");
-	while (cmd && *cmd)
+	while (cmd && cmd[i])
 	{
-		ft_printf(" %s", *cmd);
-		cmd++;
+		ft_printf(" %s", cmd[i]);
+		i++;
 	}
 	ft_printf("\n");
+	// end test
+	pid_t			pid;
+
+	pid = fork();
+	if (pid < 0)
+		ft_printf("%s: unable to launch process\n", *cmd);
+	else if (pid == 0)
+	{
+		execute_child(cmd);
+		exit(0);
+	}
+	else
+		wait(0);
 }
 
 int					main(int argc, char **argv, char **env)
@@ -47,6 +54,7 @@ int					main(int argc, char **argv, char **env)
 	{
 		env_copy = NULL;
 		buf = NULL;
+		tmp = NULL;
 		cmd = NULL;
 		get_env(&env_copy, env, argv[0]);
 		if (!env_copy)
@@ -64,24 +72,13 @@ int					main(int argc, char **argv, char **env)
 			i++;
 		}
 		// end test
-		ft_printf("atoi de 1: %d\n", ft_atoi("1"));
-		ft_printf("atoi de 2: %d\n", ft_atoi("2"));
-		ft_printf("atoi de 3: %d\n", ft_atoi("3"));
-		ft_printf("atoi de 4: %d\n", ft_atoi("4"));
-		ft_printf("atoi de 5: %d\n", ft_atoi("5"));
-		ft_printf("atoi de 6: %d\n", ft_atoi("6"));
-		ft_printf("atoi de 7: %d\n", ft_atoi("7"));
-		ft_printf("atoi de 8: %d\n", ft_atoi("8"));
-		ft_printf("atoi de 9: %d\n", ft_atoi("9"));
-		ft_printf("atoi de 10: %d\n", ft_atoi("10"));
-		ft_printf("atoi de 110: %d\n", ft_atoi("110"));
 		ft_printf("$> ");
 		while (get_next_line(1, &buf))
 		{
 			tmp = ft_strtrimall(buf);
 			cmd = ft_strsplit(tmp, ' ');
 			ft_strdel(&buf);
-			handle_cmd(cmd);
+			handle_cmd(/*&env_copy, */cmd);
 			free_tab(&cmd);
 			ft_printf("$> ");
 		}
@@ -98,20 +95,20 @@ int					main(int argc, char **argv, char **env)
 		ft_printf("$> ");
 		while (get_next_line(1, &buf))
 		{
-		cmd = ft_strsplit(buf, ' ');
-		pid = fork();
-		if (pid < 0)
-		ft_printf("error while creating child process\n");
-		else if (pid == 0)
-		{
-		execute_child(cmd);
-		}
-		else
-		{
-		wait(0);
-		ft_printf("$> ");
-		}
-		ft_strdel(&buf);
+			cmd = ft_strsplit(buf, ' ');
+			pid = fork();
+			if (pid < 0)
+				ft_printf("error while creating child process\n");
+			else if (pid == 0)
+			{
+				execute_child(cmd);
+			}
+			else
+			{
+				wait(0);
+				ft_printf("$> ");
+			}
+			ft_strdel(&buf);
 		}
 		ft_putchar('\n');
 		while (1);*/
