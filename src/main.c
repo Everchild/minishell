@@ -64,6 +64,17 @@ int					main(int argc, char **argv, char **env)
 			i++;
 		}
 		// end test
+		ft_printf("atoi de 1: %d\n", ft_atoi("1"));
+		ft_printf("atoi de 2: %d\n", ft_atoi("2"));
+		ft_printf("atoi de 3: %d\n", ft_atoi("3"));
+		ft_printf("atoi de 4: %d\n", ft_atoi("4"));
+		ft_printf("atoi de 5: %d\n", ft_atoi("5"));
+		ft_printf("atoi de 6: %d\n", ft_atoi("6"));
+		ft_printf("atoi de 7: %d\n", ft_atoi("7"));
+		ft_printf("atoi de 8: %d\n", ft_atoi("8"));
+		ft_printf("atoi de 9: %d\n", ft_atoi("9"));
+		ft_printf("atoi de 10: %d\n", ft_atoi("10"));
+		ft_printf("atoi de 110: %d\n", ft_atoi("110"));
 		ft_printf("$> ");
 		while (get_next_line(1, &buf))
 		{

@@ -12,6 +12,43 @@
 
 #include <minishell.h>
 
+static void			increment_shlvl(t_node *shlvl)
+{
+	char			*tmp;
+	size_t			lvl;
+
+	tmp = ft_strchr(shlvl->content, '=') + 1;
+	lvl = ft_atoi(tmp);
+	lvl++;
+	tmp = ft_itoa(lvl);
+	ft_memdel(&(shlvl->content));
+	shlvl->content = ft_strjoinf("SHLVL=", tmp, 2);
+}
+
+static void			handle_shlvl(t_dblist **save)
+{
+	size_t			i;
+	t_node			*cur;
+
+	i = 0;
+	cur = (*save)->start;
+	while (i < (*save)->nb_nodes)
+	{
+		if (!ft_strncmp("SHLVL=", cur->content, 6))
+			break ;
+		cur = cur->next;
+		i++;
+	}
+	if (i == (*save)->nb_nodes)
+	{
+		cur = create_node("SHLVL=1", 8);
+		if (cur)
+			add_node_end(save, cur);
+	}
+	else
+		increment_shlvl(cur);
+}
+
 static void			check_env_vars(t_dblist **save, char *exe)
 {
 	size_t			i;
@@ -77,7 +114,7 @@ void			get_env(t_dblist **save, char **orig, char *exe)
 				orig++;
 			}
 			check_env_vars(save, exe);
-//			handle_shlvl(save);
+			handle_shlvl(save);
 		}
 	}
 	else
