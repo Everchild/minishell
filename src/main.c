@@ -6,7 +6,7 @@
 /*   By: sbrochar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 16:08:28 by sbrochar          #+#    #+#             */
-/*   Updated: 2017/08/06 10:08:58 by sbrochar         ###   ########.fr       */
+/*   Updated: 2017/08/06 12:25:10 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,6 @@ int					main(int argc, char **argv, char **env)
 			ft_printf("unable to get env\n");
 			return (0);
 		}
-		// test env
-		t_node		*node = env_copy->start;
-		int			i = 0;
-		while (node)
-		{
-			ft_printf("var %d: %s\n", i, node->content);
-			node = node->next;
-			i++;
-		}
-		// end test
 		ft_printf("$> ");
 		while (get_next_line(1, &buf))
 		{
@@ -56,30 +46,6 @@ int					main(int argc, char **argv, char **env)
 	}
 	else
 		ft_printf("%s unable to take arguments\n", *argv);
-	/*	pid_t			pid;
-
-		buf = NULL;
-		cmd = NULL;
-		ft_printf("Hello, I'm a shell! :D\n");
-		ft_printf("$> ");
-		while (get_next_line(1, &buf))
-		{
-		cmd = ft_strsplit(buf, ' ');
-		pid = fork();
-		if (pid < 0)
-		ft_printf("error while creating child process\n");
-		else if (pid == 0)
-		{
-		execute_child(cmd);
-		}
-		else
-		{
-		wait(0);
-		ft_printf("$> ");
-		}
-		ft_strdel(&buf);
-		}
-		ft_putchar('\n');
-		while (1);*/
+	// while (1);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: sbrochar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 16:08:41 by sbrochar          #+#    #+#             */
-/*   Updated: 2017/08/06 10:10:11 by sbrochar         ###   ########.fr       */
+/*   Updated: 2017/08/06 13:30:56 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ typedef struct		s_builtins
 {
 	t_built			built;
 	char			*cmd;
-	int				(*builtin)(char **);
+	int				(*builtin)(t_dblist **, char **);
 }					t_builtins;
 
 void				get_env(t_dblist **save, char **orig, char *exe);
