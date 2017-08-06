@@ -6,7 +6,7 @@
 #    By: sbrochar <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/05/15 17:13:45 by sbrochar          #+#    #+#              #
-#    Updated: 2017/08/04 16:24:42 by sbrochar         ###   ########.fr        #
+#    Updated: 2017/08/06 10:07:40 by sbrochar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,8 @@ LIB_INC = $(LIB_DIR)/inc
 
 SRC = main.c \
 	  get_wd_env_vars.c \
-	  get_env.c
+	  get_env.c \
+	  handle_cmd.c
 OBJ = $(patsubst %.c,$(OBJ_DIR)/%.o,$(SRC))
 
 CC = clang

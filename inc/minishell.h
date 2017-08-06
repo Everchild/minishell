@@ -6,7 +6,7 @@
 /*   By: sbrochar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 16:08:41 by sbrochar          #+#    #+#             */
-/*   Updated: 2017/08/05 12:03:51 by sbrochar         ###   ########.fr       */
+/*   Updated: 2017/08/06 10:10:11 by sbrochar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,7 @@ typedef struct		s_builtins
 void				get_env(t_dblist **save, char **orig, char *exe);
 void				get_underscore_var(t_dblist **save, char *exe);
 void				get_pwd_var(t_dblist **save);
+
+void				handle_cmd(t_dblist **env, char **cmd);
 
 #endif
